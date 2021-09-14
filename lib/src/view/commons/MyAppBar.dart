@@ -11,7 +11,7 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
       title: Text(
         "Tea News",
         style: GoogleFonts.getFont('Roboto',
-            color: Colors.black, fontWeight: FontWeight.w500, fontSize: 20.0),
+            color: Colors.black, fontWeight: FontWeight.w500, fontSize: 22.0),
       ),
       elevation: 0,
       backgroundColor: Colors.transparent,
