@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tea_news/src/controller/news_controller.dart';
-import 'package:tea_news/src/model/category_model.dart';
 import 'package:tea_news/src/view/commons/MyAppBar.dart';
 import 'package:tea_news/src/view/widget/Headline.dart';
 import 'package:tea_news/src/view/widget/HomeCategory.dart';

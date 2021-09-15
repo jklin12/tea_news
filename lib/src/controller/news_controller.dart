@@ -10,8 +10,10 @@ class NewsController extends GetxController {
 
   var headlineModel = ArticleModel().obs;
   var isLoading = true.obs;
-  var selectedCategory = 'business'.obs;
+  var selectedCategory = ''.obs;
+
   var catModel = [
+    ModelCategory('', "Headlines"),
     ModelCategory('business', "Business"),
     ModelCategory('health', "Health"),
     ModelCategory('entertainment', "Entertainment"),
@@ -23,21 +25,28 @@ class NewsController extends GetxController {
   @override
   void onInit() {
     print("GlobalController - onInit");
-    _getHeadlineData();
+    _getHeadlineData(selectedCategory.value);
 
     super.onInit();
   }
 
   @override
   void onReady() {
-    ever(selectedCategory, (_) {
-      print("onready called , ${selectedCategory.value}");
+    ever(selectedCategory, (_) async {
+      isLoading.value = true;
+      var data = await newsDataSource!.loadHeadLineNews(selectedCategory.value);
+      var headlineResponse = ArticleModel.fromJson(data);
+      if (headlineResponse.status == 'ok') {
+        headlineModel.value = headlineResponse;
+        isLoading.value = false;
+      }
+
     });
     super.onReady();
   }
 
-  _getHeadlineData() async {
-    var data = await newsDataSource!.loadHeadLineNews();
+  _getHeadlineData(String sCategory) async {
+    var data = await newsDataSource!.loadHeadLineNews(sCategory);
 
     var headlineResponse = ArticleModel.fromJson(data);
     if (headlineResponse.status == 'ok') {
